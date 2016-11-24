@@ -16,9 +16,18 @@ apply plugin: 'kotlin'
 
 repositories {
     mavenCentral()
+    jcenter()
+    flatDir {
+        dirs 'D:\\Programme\\swipl\\lib'
+    }
 }
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile name: "jpl"
+
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.0.0-M2'
+    testCompile group: 'org.amshove.kluent', name: 'kluent', version: '1.10'
+    testCompile group: 'com.natpryce', name: 'hamkrest', version: '1.2.3.0'
 
 }
