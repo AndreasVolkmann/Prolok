@@ -1,8 +1,12 @@
 import org.jpl7.*
+import org.jpl7.Float
 import java.io.File
 
 object Prolok
 
+/**
+ * Consulting
+ */
 fun getFile(path: String) = if (File(path).exists()) query("consult", path)
 else query("consult", Prolok::class.java.getResource(path).path)
 
@@ -18,17 +22,23 @@ fun consult(path: String, logic: (Query) -> Unit) {
     }
 }
 
-
-fun termOf(vararg items: String): Array<Term> = items.map(String::toTerm).toTypedArray()
+/**
+ * Terms and Queries
+ */
+fun <T> termOf(vararg items: T): Array<Term> = items.map { it.toTerm() }.toTypedArray()
 
 fun String.toTerm() = if (this.first().isUpperCase() or this.startsWith('_')) Variable(this)
-else if (this.matches("([0-9])\\d+".toRegex())) Integer(this.toLong())
 else Atom(this)
 
+fun <T> T.toTerm() = when (this) {
+    is String -> this.toTerm()
+    is Int -> Integer(this.toLong())
+    is Double -> Float(this)
+    else -> Atom(this.toString())
+}
 
-fun query(command: String, vararg terms: String) = Query(command, termOf(*terms))
 
-fun compound(command: String, vararg terms: String) = Compound(command, termOf(*terms))
+fun query(command: String, vararg terms: Any) = Query(command, termOf(*terms))
 
 
 /**

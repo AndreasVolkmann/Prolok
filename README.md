@@ -53,6 +53,8 @@ By using a helper, one can effectively make it look like Prolog:
  fun descendantOf(one: String, two: String) = query("descendent_of", one, two)
  val t4 = descendantOf(X, "ralf")
  ```
+ 
+Queries accept String, Int, Double. Anything else will be converted to String.
 
 #### Solutions
 Getting all solutions can be done like this:
