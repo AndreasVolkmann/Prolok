@@ -3,14 +3,27 @@ import java.io.File
 
 object Prolok
 
-fun consult(path: String) = (if (File(path).exists()) query("consult", path)
-else query("consult", Prolok::class.java.getResource(path).path)).hasSolution()
+fun getFile(path: String) = if (File(path).exists()) query("consult", path)
+else query("consult", Prolok::class.java.getResource(path).path)
+
+fun consult(path: String) = getFile(path).hasSolution()
+
+fun consult(path: String, logic: (Query) -> Unit) {
+    val file = getFile(path)
+    try {
+        if (!file.hasSolution()) throw Exception("File could not be consulted: $path")
+        logic(file)
+    } finally {
+        file.close()
+    }
+}
 
 
-fun termOf(vararg items: String): Array<Term> = items.map {
-    if (it.first().isUpperCase() or it.startsWith('_')) Variable(it)
-    else Atom(it)
-}.toTypedArray()
+fun termOf(vararg items: String): Array<Term> = items.map(String::toTerm).toTypedArray()
+
+fun String.toTerm() = if (this.first().isUpperCase() or this.startsWith('_')) Variable(this)
+else if (this.matches("([0-9])\\d+".toRegex())) Integer(this.toLong())
+else Atom(this)
 
 
 fun query(command: String, vararg terms: String) = Query(command, termOf(*terms))

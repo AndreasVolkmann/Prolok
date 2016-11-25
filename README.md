@@ -2,6 +2,24 @@
 
 A sample integration and exploration of Prolog and Kotlin.
 
+```
+consult("family.pl") {
+    val q = query("descendent_of", X, Y)
+    val solutions = q.getSolutions(X, Y)
+    sols.forEach(::println)
+}
+```
+
+This prints all possible solutions for X and Y:
+```
+[joe, ralf]
+[mary, joe]
+[steve, joe]
+[mary, ralf]
+[steve, ralf]
+```
+
+
 ## Install
 
 Steps needed to get Prolog working with Kotlin:
@@ -19,7 +37,10 @@ The architechture (32 / 64 bit) needs to match your JVM's.
 ## Utility
 
 #### Consult
-Consulting is as easy as ``consult("family.pl")``
+Consulting is as easy as ``consult("family.pl")``.
+
+
+
 
 #### Query
 Creating any Query is done with the query() function. 
