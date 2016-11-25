@@ -8,6 +8,14 @@ import org.junit.Test
 
 class TermConversionTest {
 
+    @Test
+    fun `String of numbers should become an Atom`() {
+        val text = "1005"
+        val res = text.toTerm()
+        res as Atom
+        res shouldEqual Atom(text)
+    }
+
 
     @Test
     fun `An Int should be converted to Integer`() {

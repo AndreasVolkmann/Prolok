@@ -10,9 +10,7 @@ object Prolok
 fun getFile(path: String) = if (File(path).exists()) query("consult", path)
 else query("consult", Prolok::class.java.getResource(path).path)
 
-fun consult(path: String) = getFile(path).hasSolution()
-
-fun consult(path: String, logic: (Query) -> Unit) {
+inline fun consult(path: String, logic: (Query) -> Unit) {
     val file = getFile(path)
     try {
         if (!file.hasSolution()) throw Exception("File could not be consulted: $path")
@@ -56,6 +54,3 @@ fun Query.getSolutions(item: String): List<Term?> {
     val ss = this.allSolutions()
     return ss.map { it[item] }
 }
-
-
-//infix fun String.query(vararg arguments: String) = ""
