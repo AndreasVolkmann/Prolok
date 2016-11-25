@@ -29,6 +29,7 @@ class MedicalTest {
 
             multipleJobs("X") shouldBe false
             query("multipleJobs", "X").getSolutions("X").isEmpty() shouldBe true
+            query("multipleJobs", "X").getSolutions().isEmpty() shouldBe true
 
             doctor("50") shouldBe true // still fails
         }

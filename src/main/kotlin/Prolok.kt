@@ -54,3 +54,5 @@ fun Query.getSolutions(item: String): List<Term?> {
     val ss = this.allSolutions()
     return ss.map { it[item] }
 }
+
+fun Query.getSolutions(): List<List<Term>> = this.allSolutions().map { it.values.toList() }
