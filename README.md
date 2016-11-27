@@ -1,11 +1,11 @@
-# Prolok
+# avo.me.Prolok.Prolok
 
 A sample integration and exploration of Prolog and Kotlin.
 
 ```
-consult("family.pl") {
-    val q = query("descendent_of", X, Y)
-    val solutions = q.getSolutions(X, Y)
+avo.me.Prolok.consult("family.pl") {
+    val q = avo.me.Prolok.query("descendent_of", X, Y)
+    val solutions = q.avo.me.Prolok.getSolutions(X, Y)
     sols.forEach(::println)
 }
 ```
@@ -37,20 +37,20 @@ The architechture (32 / 64 bit) needs to match your JVM's.
 ## Utility
 
 #### Consult
-Consulting is as easy as ``consult("family.pl")``.
+Consulting is as easy as ``avo.me.Prolok.consult("family.pl")``.
 
 
 
 
 #### Query
-Creating any Query is done with the query() function. 
+Creating any Query is done with the avo.me.Prolok.query() function. 
 
-``query("descendent_of", X, "ralf")`` will turn into: descendent_of( X, ralf )
+``avo.me.Prolok.query("descendent_of", X, "ralf")`` will turn into: descendent_of( X, ralf )
 
 By using a helper, one can effectively make it look like Prolog:
  
  ```
- fun descendantOf(one: String, two: String) = query("descendent_of", one, two)
+ fun descendantOf(one: String, two: String) = avo.me.Prolok.query("descendent_of", one, two)
  val t4 = descendantOf(X, "ralf")
  ```
  
@@ -60,11 +60,11 @@ Queries accept String, Int, Double. Anything else will be converted to String.
 Getting all solutions can be done like this:
 
 ```
-val t5 = query("descendent_of", X, Y)
-t5.getSolutions(X, Y)
+val t5 = avo.me.Prolok.query("descendent_of", X, Y)
+t5.avo.me.Prolok.getSolutions(X, Y)
 ```
 
-It works for any query, from 1 to many arguments. 
+It works for any avo.me.Prolok.query, from 1 to many arguments. 
 
 
 #### Compound

@@ -10,6 +10,7 @@ json
 /data
 /build
 .gradle
+/prolog
 /node_modules
 components
 bundle.js
@@ -21,7 +22,7 @@ gradle-app.setting
 
 # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
 !gradle-wrapper.jar
-
+gradle.properties
 # Cache of project
 .gradletasknamecache
 

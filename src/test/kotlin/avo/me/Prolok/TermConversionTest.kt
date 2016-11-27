@@ -1,3 +1,7 @@
+package avo.me.Prolok
+
+import avo.me.Prolok.termOf
+import avo.me.Prolok.toTerm
 import org.amshove.kluent.shouldEqual
 import org.amshove.kluent.shouldThrow
 import org.jpl7.Atom
@@ -58,7 +62,7 @@ class TermConversionTest {
 
         res[0] shouldEqual Integer(1)
         res[1] shouldEqual Atom("atom")
-        res[2] shouldEqual org.jpl7.Float(1.5)
+        res[2] shouldEqual Float(1.5)
         res[3] shouldEqual Variable("Variable")
     }
 

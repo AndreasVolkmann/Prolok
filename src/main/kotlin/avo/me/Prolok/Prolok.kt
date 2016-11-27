@@ -1,14 +1,32 @@
+package avo.me.Prolok
+
 import org.jpl7.*
 import org.jpl7.Float
 import java.io.File
 
-object Prolok
+object Prolok {
+
+    fun toFile(path: String, list: List<Any>) {
+        val mapped = list.map {
+            when (it) {
+                is Query -> it.toString() + "."
+                else -> it.toString()
+            }
+
+        }
+        mapped.forEach(::println)
+        File(path).printWriter().use { out ->
+            mapped.forEach { out.println(it) }
+        }
+    }
+
+}
 
 /**
  * Consulting
  */
 fun getFile(path: String) = if (File(path).exists()) query("consult", path)
-else query("consult", Prolok::class.java.getResource(path).path)
+else query("consult", Prolok::class.java.classLoader.getResource(path).path)
 
 inline fun consult(path: String, logic: (Query) -> Unit) {
     val file = getFile(path)

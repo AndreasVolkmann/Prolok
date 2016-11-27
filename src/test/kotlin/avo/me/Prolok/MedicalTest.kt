@@ -1,14 +1,19 @@
-import org.amshove.kluent.shouldBe
+package avo.me.Prolok
+
+import avo.me.Prolok.consult
+import avo.me.Prolok.getSolutions
+import avo.me.Prolok.query
+import org.amshove.kluent.`should be`
 import org.junit.jupiter.api.Test
 
 class MedicalTest {
 
     @Test
     fun medical() {
-        fun doctor(x: Any) = query("doctor", x).hasSolution()
-        fun nurse(x: Any) = query("nurse", x).hasSolution()
-        fun medical(x: Any) = query("medical", x).hasSolution()
-        fun multipleJobs(x: Any) = query("multipleJobs", x).hasSolution()
+        fun doctor(x: Any) = query("doctor", x)
+        fun nurse(x: Any) = query("nurse", x)
+        fun medical(x: Any) = query("medical", x)
+        fun multipleJobs(x: Any) = query("multipleJobs", x)
 
         consult("medical.pl") {
 
@@ -28,8 +33,8 @@ class MedicalTest {
             medical(8) shouldBe true
 
             multipleJobs("X") shouldBe false
-            query("multipleJobs", "X").getSolutions("X").isEmpty() shouldBe true
-            query("multipleJobs", "X").getSolutions().isEmpty() shouldBe true
+            multipleJobs("X").getSolutions("X").isEmpty() `should be`  true
+            multipleJobs("X").getSolutions().isEmpty() `should be`  true
 
             doctor("50") shouldBe true // still fails
         }

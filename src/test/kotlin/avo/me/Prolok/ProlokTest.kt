@@ -1,3 +1,9 @@
+package avo.me.Prolok
+
+import avo.me.Prolok.consult
+import avo.me.Prolok.getSolutions
+import avo.me.Prolok.query
+import avo.me.Prolok.toTerm
 import org.amshove.kluent.shouldContain
 import org.amshove.kluent.shouldEqual
 import org.jpl7.Atom
