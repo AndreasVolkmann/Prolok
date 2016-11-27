@@ -19,11 +19,11 @@ apply plugin: 'maven-publish'
 
 
 group 'me.avo'
-version '0.1.2'
+version '0.1.3'
 
-task sourceJar(type: Jar) {
+jar {
+    from sourceSets.main.output
     from sourceSets.main.allJava
-    classifier "sources"
 }
 
 publishing {
@@ -31,12 +31,8 @@ publishing {
         Prolok(MavenPublication) {
             from components.java
             groupId "${project.getGroup()}"
-            artifactId Project.getName()
+            artifactId project.getName()
             version project.getVersion()
-
-            artifact sourceJar {
-                classifier "sources"
-            }
         }
     }
 }

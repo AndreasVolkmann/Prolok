@@ -67,6 +67,31 @@ t5.getSolutions(X, Y)
 It works for any query, from 1 to many arguments. 
 
 
+#### To File
+One can easily create a Prolog file programmatically.
+
+```
+fun doctor(id: Int) = query("doctor", id)
+
+Prolok.toFile("prolog/test.pl", listOf(
+        doctor(1),
+        doctor(3),
+        doctor(6), // helper function
+        query("complex", 2, 999, "complicated"), // using query
+        "isPerson(X):- doctor(X); complex(2, 999, X)." // Raw String
+))
+```
+
+This will produce a file at the specified path with the following content.
+```
+doctor( 1 ).
+doctor( 3 ).
+doctor( 6 ).
+complex( 2, 999, complicated ).
+isPerson(X):- doctor(X); complex(2, 999, X).
+```
+
+
 #### Compound
 To create a Compound with any number of Terms:
 
